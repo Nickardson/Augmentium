@@ -1,0 +1,16 @@
+[
+{
+  "modid": "augmentium",
+  "name": "Augmentium",
+  "description": "Run JavaScript ingame.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Nickardson"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
