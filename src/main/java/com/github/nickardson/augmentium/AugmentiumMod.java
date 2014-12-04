@@ -2,11 +2,10 @@ package com.github.nickardson.augmentium;
 
 import com.github.nickardson.augmentium.script.EventHook;
 import com.github.nickardson.augmentium.script.api.APIClient;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +24,7 @@ public class AugmentiumMod
 
     private static File jarFile;
 
-    @EventHandler
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         instance = this;
         logger = LogManager.getLogger("Augmentium");
@@ -60,7 +59,7 @@ public class AugmentiumMod
     public static final APIWorld world = new APIWorld();
     public static final APIClient client = new APIClient();
 
-    @EventHandler
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
         MinecraftForge.EVENT_BUS.register(new AugmentiumListener());

@@ -5,6 +5,8 @@ import com.github.nickardson.gui.util.RenderUtility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
+import java.io.IOException;
+
 public class HookableGuiScreen extends GuiScreen {
     public EventHook onKey = new EventHook();
     public EventHook onMouseMove = new EventHook();
@@ -15,11 +17,14 @@ public class HookableGuiScreen extends GuiScreen {
     public EventHook onClose = new EventHook();
 
     @Override
-    protected void mouseMovedOrUp(int x, int y, int which) {
-        if (which == -1) {
-            onMouseMove.trigger(x, y, which);
-        } else {
-            onMouseUp.trigger(x, y, which);
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        onMouseUp.trigger(mouseX, mouseY);
+    }
+
+    @Override
+    protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
+        if (clickedMouseButton == -1) {
+            onMouseMove.trigger(mouseX, mouseY, clickedMouseButton);
         }
     }
 
@@ -29,8 +34,9 @@ public class HookableGuiScreen extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char charater, int keyID) {
+    protected void keyTyped(char charater, int keyID) throws IOException {
         onKey.trigger(keyID, charater);
+
 
         super.keyTyped(charater, keyID);
     }
@@ -72,7 +78,7 @@ public class HookableGuiScreen extends GuiScreen {
     }
 
     public void drawText(String text, int x, int y, int color) {
-        drawString(Minecraft.getMinecraft().fontRenderer, text, x, y, color);
+        drawString(Minecraft.getMinecraft().fontRendererObj, text, x, y, color);
     }
 
     public void show() {

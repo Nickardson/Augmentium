@@ -46,7 +46,7 @@ public class UnicodeFontRenderer extends FontRenderer {
     }
 
     @Override
-    public int drawString(String text, int x, int y, int defaultColor, boolean shadow) {
+    public int drawString(String text, float x, float y, int defaultColor, boolean shadow) {
         if (text == null || text.isEmpty()) {
             return 0;
         }
@@ -144,7 +144,7 @@ public class UnicodeFontRenderer extends FontRenderer {
     }
 
     @Override
-    public int drawStringWithShadow(String string, int x, int y, int color) {
+    public int drawStringWithShadow(String string, float x, float y, int color) {
         drawString(string, x, y, color, true);
         return drawString(string, x, y, color, false);
     }

@@ -55,7 +55,6 @@ public class RenderUtility {
         enableDepth();
 
         glLineWidth(1);
-        glDisable(GL_BLEND);
         glEnable(GL_CULL_FACE);
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_LINE_SMOOTH);
