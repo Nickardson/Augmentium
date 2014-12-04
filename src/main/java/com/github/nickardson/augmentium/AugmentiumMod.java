@@ -14,7 +14,7 @@ import java.nio.file.Files;
 public class AugmentiumMod
 {
     public static final String MODID = "augmentium";
-    public static final String VERSION = "1.7.10-1.0";
+    public static final String VERSION = "1.8-1.0";
 
     public static AugmentiumMod instance;
 
