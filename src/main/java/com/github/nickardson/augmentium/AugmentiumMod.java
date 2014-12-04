@@ -1,7 +1,5 @@
 package com.github.nickardson.augmentium;
 
-import com.github.nickardson.augmentium.script.EventHook;
-import com.github.nickardson.augmentium.script.api.APIClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -43,21 +41,6 @@ public class AugmentiumMod
             logger.fatal("Source file/folder does not exist!");
         }
     }
-
-    public static class APIWorld {
-        private final EventHook onTick = new EventHook();
-        public EventHook getOnTick() {return onTick;}
-
-        private final EventHook onLoad = new EventHook();
-        public EventHook getOnLoad() {return onLoad;}
-
-        @Override
-        public String toString() {
-            return "[object World]";
-        }
-    }
-    public static final APIWorld world = new APIWorld();
-    public static final APIClient client = new APIClient();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)

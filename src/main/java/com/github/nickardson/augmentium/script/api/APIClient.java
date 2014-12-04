@@ -5,6 +5,8 @@ import org.lwjgl.opengl.Display;
 import org.mozilla.javascript.annotations.JSGetter;
 
 public class APIClient {
+    public static APIClient instance = new APIClient();
+
     private final EventHook onRender = new EventHook();
     @JSGetter
     public EventHook getOnRender() {
@@ -21,5 +23,10 @@ public class APIClient {
 
     public HookableGuiScreen createGUI() {
         return new HookableGuiScreen();
+    }
+
+    @Override
+    public String toString() {
+        return "[api Client]";
     }
 }

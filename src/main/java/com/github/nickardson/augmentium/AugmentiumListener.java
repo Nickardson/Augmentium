@@ -1,5 +1,7 @@
 package com.github.nickardson.augmentium;
 
+import com.github.nickardson.augmentium.script.api.APIClient;
+import com.github.nickardson.augmentium.script.api.APIWorld;
 import com.github.nickardson.gui.util.RenderUtility;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -14,7 +16,7 @@ public class AugmentiumListener {
 
         RenderUtility.scale1to1();
         RenderUtility.startOverlay();
-        AugmentiumMod.client.getOnRender().trigger(event.partialTicks);
+        APIClient.instance.getOnRender().trigger(event.partialTicks);
         RenderUtility.endOverlay();
         RenderUtility.unscale();
     }
@@ -22,12 +24,12 @@ public class AugmentiumListener {
     @SubscribeEvent()
     public void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.side.isClient()) {
-            AugmentiumMod.world.getOnTick().trigger();
+            APIWorld.instance.getOnTick().trigger();
         }
     }
 
     @SubscribeEvent()
     public void onWorldLoad(WorldEvent.Load event) {
-        AugmentiumMod.world.getOnLoad().trigger(event.world.provider.getDimensionId());
+        APIWorld.instance.getOnLoad().trigger(event.world.provider.getDimensionId());
     }
 }

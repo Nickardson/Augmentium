@@ -8,4 +8,3 @@ require('minecraft');
 
 // Load 'depend' into global namespace
 require('depend');
-print(depend('x').foo);
