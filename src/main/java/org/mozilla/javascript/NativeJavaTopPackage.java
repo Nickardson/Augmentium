@@ -93,7 +93,11 @@ public class NativeJavaTopPackage
         String[] topNames = ScriptRuntime.getTopPackageNames();
         NativeJavaPackage[] topPackages = new NativeJavaPackage[topNames.length];
         for (int i=0; i < topNames.length; i++) {
-            topPackages[i] = (NativeJavaPackage)top.get(topNames[i], top);
+            // topPackages[i] = (NativeJavaPackage) top.get(topNames[i], top);
+
+            // Solves the issue of Rhino finding a class named 'com.class' when minecraft is obfuscated.
+            // This manually sets all top-level packages to be references to a custom NativeJavaPackage.
+            topPackages[i] = top.forcePackage(topNames[i], scope);
         }
 
         // It's safe to downcast here since initStandardObjects takes

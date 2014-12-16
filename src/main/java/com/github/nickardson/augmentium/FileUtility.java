@@ -9,19 +9,33 @@ import java.util.jar.JarFile;
 
 public class FileUtility {
 
-    public static void tryExtractFolder(File jar, String classpathFolder, File destination) {
-        if (!destination.exists() || !destination.isDirectory()) {
-            destination.mkdir();
+    public static boolean createIfNotExist (File file) {
+        if (!file.exists()) {
+            AugmentiumMod.logger.debug("Creating folder 'augmentium");
+            if (!file.mkdirs()) {
+                AugmentiumMod.logger.fatal("Could not create folder 'augmentium'");
+                return false;
+            }
+        }
+        return true;
+    }
 
-            for (String filename : FileUtility.dir(jar, classpathFolder)) {
-                File fileDest = new File(destination, filename.substring(classpathFolder.length() + 1));
-                fileDest.getParentFile().mkdirs();
-                try {
-                    FileUtility.exportResource("/" + filename, fileDest);
-                } catch (Exception e) {
-                    AugmentiumMod.logger.fatal("Unable to extract: " + filename);
-                    e.printStackTrace();
-                }
+    public static void tryExtractFolder(File jar, String classpathFolder, File destination) {
+        classpathFolder = trimPath(classpathFolder);
+        if (!destination.exists() || !destination.isDirectory()) {
+            AugmentiumMod.logger.debug("while extracting, created directory " + destination);
+            destination.mkdir();
+        }
+
+        for (String filename : FileUtility.dir(jar, classpathFolder)) {
+            File fileDest = new File(destination, filename.substring(classpathFolder.length() + 1));
+
+            fileDest.getParentFile().mkdirs();
+            try {
+                FileUtility.exportResource("/" + filename, fileDest);
+            } catch (Exception e) {
+                AugmentiumMod.logger.fatal("Unable to extract: " + filename);
+                e.printStackTrace();
             }
         }
     }
@@ -77,15 +91,26 @@ public class FileUtility {
         }
     }
 
+    public static String trimPath(String path) {
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        if (path.endsWith("/")) {
+            path = path.substring(0, path.length() - 1);
+        }
+
+        return path;
+    }
+
     /**
      * Gets a list of resource files inside of a JAR file.
      * @param jarFile The jar file to search inside
      * @param path Subpath to match.
      * @return
      */
-    public static List<String> dir(File jarFile, final String path) {
+    public static List<String> dir(File jarFile, String path) {
         final List<String> ls = new ArrayList<String>();
-
+        path = trimPath(path);
         try {
             JarFile jar = new JarFile(jarFile);
 
