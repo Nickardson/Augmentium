@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class AugmentiumServer extends SimpleWebServer {
     public AugmentiumServer(File wwwroot, boolean quiet) {
-        super(null, 8080, wwwroot, quiet);
+        super("localhost", 8080, wwwroot, quiet);
     }
 
     @Override
