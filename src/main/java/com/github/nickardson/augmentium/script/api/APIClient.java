@@ -13,6 +13,12 @@ public class APIClient {
         return onRender;
     }
 
+    private final EventHook onRenderWorld = new EventHook();
+    @JSGetter
+    public EventHook getOnRenderWorld() {
+        return onRenderWorld;
+    }
+
     public void setWindowTitle(String text) {
         Display.setTitle(text);
     }
